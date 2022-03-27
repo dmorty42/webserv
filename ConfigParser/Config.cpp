@@ -74,10 +74,8 @@ std::map<std::string, Location> parseLocation(std::string configFile) {
     for (; i[0] != std::string::npos; ) {
         i[1] = configFile.find("{", i[0]) - 1;
         directory = configFile.substr(i[0] + 9, i[1] - i[0] - 9);
-        std::cout << directory << std::endl;
         block = parseBlock(configFile, i[0]);
         temp[directory] = Location(block);
-        std::cout << block << std::endl;
         i[0] = configFile.find("location", i[0] + 9);
     }
     return (temp);

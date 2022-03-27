@@ -7,8 +7,6 @@
 
 #include "../Webserv.hpp"
 
-class ConfigParser;
-
 class Server {
 private:
     int _socket;

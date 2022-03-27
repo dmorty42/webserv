@@ -1,39 +1,34 @@
-NAME	=	webserver
+.PHONY: all clean fclean re
 
-SRCS	=	Cluster/Cluster.cpp\
-			Cluster/Server.cpp\
-			Cluster/Server_utils.cpp\
-			ConfigParser/Config.cpp\
-			ConfigParser/ConfigParser.cpp\
-			ConfigParser/Location.cpp\
-			main.cpp\
-			Utils.cpp
+NAME = webserv
 
-HEADERS	=	Webserv.hpp\
-			Cluster/Cluster.hpp\
-            Cluster/Server.hpp\
-			ConfigParser/Location.hpp\
-			ConfigParser/ConfigParser.hpp\
-			ConfigParser/Config.hpp\
+SRCS =	Cluster/Cluster.cpp\
+        Cluster/Server.cpp\
+        Cluster/Server_utils.cpp\
+        ConfigParser/Config.cpp\
+        ConfigParser/ConfigParser.cpp\
+        ConfigParser/Location.cpp\
+        main.cpp\
+        Utils.cpp
+HDRS =	Webserv.hpp
+OBJS = $(SRCS:.cpp=.o)
 
-CC		=	c++
+CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
 
-CXXFLAGS	=	-Wall -Wextra -Werror -g -std=c++98
+%.o: %.cpp $(HDRS)
+	c++ -c $(CFLAGS) $< -o $@
 
-OBJS	=	$(SRCS:.cpp=.o)
-
-%.o: %.c
-	$(CC) $(CXXFLAGS) $(SRCS)
+CC = c++ $(CFLAGS)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(OBJS) -o $@ $^
+$(NAME): $(OBJS) $(HDRS)
+	$(CC) $(SRCS) -o $(NAME)
 
 clean:
-	rm -rf *.o
+	rm -f $(OBJS)
 
 fclean: clean
-	rm -rf $(NAME)
+	rm -f $(NAME)
 
-.PHONY:	all clean fclean re
+re: fclean all
