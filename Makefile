@@ -5,6 +5,8 @@ NAME = webserv
 SRCS =	Cluster/Cluster.cpp\
         Cluster/Server.cpp\
         Cluster/Server_utils.cpp\
+        Request/Request.cpp\
+        Request/RequestUtils.cpp\
         ConfigParser/Config.cpp\
         ConfigParser/ConfigParser.cpp\
         ConfigParser/Location.cpp\
@@ -13,7 +15,7 @@ SRCS =	Cluster/Cluster.cpp\
 HDRS =	Webserv.hpp
 OBJS = $(SRCS:.cpp=.o)
 
-CFLAGS = -Wall -Wextra -Werror -std=c++98 -pedantic
+CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 %.o: %.cpp $(HDRS)
 	c++ -c $(CFLAGS) $< -o $@

@@ -7,14 +7,21 @@
 
 #include "../Webserv.hpp"
 
+class Request;
+
 class Server {
 private:
     int _socket;
     sockaddr_in _addr;
+    std::map<int, std::string> _buff;
+    std::map<int, Request> _requests;
 public:
     Server();
+    ~Server();
     int setup(int& kq, ConfigParser& config, int index);
     int getSocket() const;
+    int receive(int connection);
+    int send();
 
 };
 

@@ -19,11 +19,13 @@
 #include "fstream"
 #include <netinet/in.h>
 #include <map>
+#include <set>
 #include "./ConfigParser/Config.hpp"
 #include "./ConfigParser/ConfigParser.hpp"
 #include "./ConfigParser/Location.hpp"
 #include "./Cluster/Cluster.hpp"
 #include "./Cluster/Server.hpp"
+#include "./Request/Request.hpp"
 
 //Utils functions
 void checkFileName(std::string fileName);

@@ -5,7 +5,8 @@
 #include "ConfigParser.hpp"
 
 ConfigParser::ConfigParser(std::string configFile) {
-    std::ifstream ifs(configFile);
+    std::ifstream ifs;
+    ifs.open(configFile.c_str());
     std::vector<bool> brackets;
     std::string temp, line;
     if (!ifs.is_open()) {

@@ -10,6 +10,7 @@ int main(int argc, char **argv, char **env) {
     Cluster cluster;
     if (cluster.setup(argv[1]))
         return (EXIT_FAILURE);
-
+    if (cluster.run())
+        return (EXIT_FAILURE);
     return 0;
 }

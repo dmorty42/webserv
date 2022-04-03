@@ -19,9 +19,10 @@ private:
 public:
     Cluster();
     int setup(const std::string& fileName);
-
+    int run();
 };
 
+typedef std::map<int, Server>::iterator ServerIterator;
 
 #endif
 

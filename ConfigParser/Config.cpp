@@ -20,7 +20,7 @@ t_host parseHost(std::string configFile) {
     if (configFile.find("listen") != std::string::npos) {
        temp = configFile.substr(configFile.find("listen"));
         i[0] = temp.find(":");
-        host.port = atoi(temp.substr(i[0] + 1).c_str());
+        host.port = std::stoi(temp.substr(i[0] + 1));
         i[1] = temp.find("listen") + 7;
         temp = temp.substr(i[1], i[0] - i[1]);
         host.host = inet_addr(temp.c_str());
@@ -75,19 +75,36 @@ std::map<std::string, Location> parseLocation(std::string configFile) {
         i[1] = configFile.find("{", i[0]) - 1;
         directory = configFile.substr(i[0] + 9, i[1] - i[0] - 9);
         block = parseBlock(configFile, i[0]);
-        temp[directory] = Location(block);
+        temp[directory] = Location(block, directory);
         i[0] = configFile.find("location", i[0] + 9);
     }
     return (temp);
 }
 
+std::map<int, std::string> parsePages(std::string configFile) {
+    std::map<int, std::string> temp;
+    int code;
+    size_t i[2];
+    i[0] = configFile.find("page_");
+    for (; i[0] != std::string::npos; ) {
+        i[1] = configFile.find(" ", i[0]);
+        code = atoi(configFile.substr(i[0] + 5, i[1] - i[0] - 5).c_str());
+        i[0] = configFile.find("\n", i[1]);
+        temp[code] =  configFile.substr(i[1] + 1, i[0] - i[1]- 1);
+        i[0] = configFile.find("page_", i[0]);
+    }
+    return temp;
+}
+
 Config::Config(std::string configFile) {
     serverName = parseServerName(configFile);
     host = parseHost(configFile);
-    root = parseRoot(configFile);
     allowedMethods = parseMethod(configFile);
     location = parseLocation(configFile);
+    pages = parsePages(configFile);
 }
+
+Config::Config(){}
 
 // Getters
 
@@ -99,10 +116,6 @@ t_host Config::getHost() const {
     return (host);
 }
 
-std::string Config::getRoot() const {
-    return (root);
-}
-
 std::vector <std::string> Config::getAllowedMethods() const {
     return (allowedMethods);
 }
@@ -110,3 +123,5 @@ std::vector <std::string> Config::getAllowedMethods() const {
 std::map <std::string, Location> Config::getLocation() const {
     return (location);
 }
+
+std::map<int, std::string> Config::getPages() const { return (pages); }
