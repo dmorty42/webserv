@@ -26,6 +26,14 @@
 #include "./Cluster/Cluster.hpp"
 #include "./Cluster/Server.hpp"
 #include "./Request/Request.hpp"
+#include "./Methods/Methods.hpp"
+
+enum METHODS {
+    GET = 0,
+    POST = 1,
+    DELETE = 2,
+    UNDEFINED = 3
+};
 
 //Utils functions
 void checkFileName(std::string fileName);
@@ -34,5 +42,7 @@ void putError();
 //Server utils
 int setWriteFlag(int& kq, int& sock);
 int setReadFlag(int& kq, int& sock);
+const Location &search_location(std::string path,
+                                const std::map<std::string, Location> &locations);
 
 #endif

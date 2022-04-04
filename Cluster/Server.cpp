@@ -13,6 +13,7 @@ int Server::setup(int& kq, ConfigParser& config, int index) {
     _addr.sin_family = AF_INET;
     _addr.sin_port = htons(config.getConfig()[index].getHost().port);
     _addr.sin_addr.s_addr = htonl(config.getConfig()[index].getHost().host);
+    _config =  new Config(config.getConfig()[index]);
     if ((_socket = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
         perror("Error: socket: ");
         return (EXIT_FAILURE);
@@ -63,7 +64,7 @@ int Server::receive(int connection) {
                 return 1;
         }
         std::string str(buff);
-        _requests[connection] = Request(str);
+        _requests[connection] = Request(str, _config);
         return (0);
     }
     return (1);

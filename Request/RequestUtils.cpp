@@ -24,22 +24,20 @@ std::string ft_version(std::string& buff) {
 
 std::map<std::string, std::string> ft_values(std::string& buff) {
     std::map<std::string, std::string> temp;
-    std::string key, value;
-    size_t i[2];
+    std::string key, value, str;
+    size_t i[4];
     i[0] = buff.find("\n");
-    for (; i[0] != std::string::npos; ) {
-        i[1] = buff.find(":", i[0]);
-        if (i[1] == std::string::npos)
-            break;
-        key = buff.substr(i[0] + 1, i[1] - i[0] - 1);
-        i[0] = buff.find("\n", i[1]);
-        if (i[0] == std::string::npos)
-            i[0] = buff.find("\0");
-        value = buff.substr(i[1] + 2, i[0] - i[1] -1);
+    i[2] = buff.find("\r\n\r\n");
+    for (; i[0] != i[2] ; ) {
+        i[1] = buff.find("\n", i[0] + 1);
+        str = buff.substr(i[0] + 1, i[1] - i[0] - 2);
+        i[3] = str.find(":");
+        key = str.substr(0, i[3]);
+        value = str.substr(i[3] + 2);
         temp[key] = value;
-        i[0] = buff.find("\n", i[1]);
-        key.erase();
-        value.erase();
+        i[0] = buff.find("\n", i[0] + 1);
+        if (i[0] == std::string::npos || !key.compare("Cookie"))
+            break;
     }
     return (temp);
 }

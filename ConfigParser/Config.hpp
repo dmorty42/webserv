@@ -21,6 +21,8 @@ private:
 public:
     Config();
     Config(std::string configFile);
+    Config(const Config& other);
+    Config& operator=(const Config& other);
     std::string getServerName() const;
     t_host getHost() const;
     std::vector<std::string> getAllowedMethods() const;

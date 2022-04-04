@@ -10,6 +10,7 @@ SRCS =	Cluster/Cluster.cpp\
         ConfigParser/Config.cpp\
         ConfigParser/ConfigParser.cpp\
         ConfigParser/Location.cpp\
+        Methods/Methods.cpp\
         main.cpp\
         Utils.cpp
 HDRS =	Webserv.hpp

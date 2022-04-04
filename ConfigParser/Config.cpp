@@ -32,7 +32,7 @@ std::string parseRoot(std::string configFile) {
         size_t i[2];
         if ((i[0] = configFile.find("root")) != std::string::npos) {
             i[1] = configFile.find("\n", i[0]);
-            return (configFile.substr(i[0], i[1] - i[0]));
+            return (configFile.substr(i[0] + 5, i[1] - i[0] - 5));
         }
     return ("none");
 }
@@ -105,6 +105,19 @@ Config::Config(std::string configFile) {
 }
 
 Config::Config(){}
+
+Config::Config(const Config &other) {
+    serverName = other.serverName;
+    host = other.host;
+    pages = other.pages;
+    allowedMethods = other.allowedMethods;
+    location = other.location;
+}
+
+Config &Config::operator=(const Config &other) {
+    (void)other;
+    return (*this);
+}
 
 // Getters
 

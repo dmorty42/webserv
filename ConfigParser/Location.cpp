@@ -7,6 +7,8 @@
 std::string parseIndex(std::string block) {
     size_t i[2];
     i[0] = block.find("index");
+    if (i[0] == block.find("auto_index") + 5)
+        i[0] = block.find("index", i[0] + 1);
     if (i[0] == std::string::npos)
         return ("");
     i[0] += 6;
