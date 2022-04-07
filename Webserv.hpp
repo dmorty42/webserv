@@ -27,6 +27,7 @@
 #include "./Cluster/Server.hpp"
 #include "./Request/Request.hpp"
 #include "./Methods/Methods.hpp"
+#include "./Response/Response.hpp"
 
 enum METHODS {
     GET = 0,

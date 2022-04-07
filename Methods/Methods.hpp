@@ -15,6 +15,7 @@ private:
     int _code;
     int _method;
     bool _autoIndex;
+    std::string _page;
     std::string _pagePath;
     std::string _allowedMethods[3];
 
@@ -22,6 +23,7 @@ private:
     void methodGet(Request& request, Config& config);
     void methodPost(Request& request, Config& config);
     void methodDelete(Request& request, Config& config);
+    void getPageContent(std::string& fileName);
 
 public:
     Methods();
@@ -30,6 +32,8 @@ public:
     int getCode() const;
     int getMethod() const;
     bool getAutoIndex() const;
+    std::string getPagePath() const;
+    std::string getPage() const;
 };
 
 

@@ -34,6 +34,8 @@ Methods::Methods(Request &request, Config& config) {
     }
 }
 
+Methods::~Methods() { }
+
 std::map<std::string, std::string> splitBody(std::string body, std::string delim) {
     std::map<std::string, std::string> temp;
     std::string filename;
@@ -79,18 +81,18 @@ void Methods::methodPost(Request &request, Config &config) {
     size_t i = 0;
     std::map<std::string, std::string> body;
     std::string delim;
-    Location temp = search_location(request.getPath(), config.getLocation());
-    for (; i < temp.getAllowedMethods().size(); ++i) {
-        if (!temp.getAllowedMethods()[i].compare("POST"))
+    Location _location = search_location(request.getPath(), config.getLocation());
+    for (; i < _location.getAllowedMethods().size(); ++i) {
+        if (!_location.getAllowedMethods()[i].compare("POST"))
             break;
     }
-    if (i == temp.getAllowedMethods().size()) {
+    if (i == _location.getAllowedMethods().size()) {
         _code = 405;
         return;
     }
     _method = POST;
     int bodySize = stoi(request.getValues().find("Content-Length")->second);
-    if (bodySize > temp.getBodySize()) {
+    if (bodySize > _location.getBodySize()) {
         _code = 403;
         return;
     }
@@ -102,35 +104,53 @@ void Methods::methodPost(Request &request, Config &config) {
     std::ofstream *ofs;
     std::map<std::string, std::string>::iterator it = body.begin();
     for (; it != body.end() ; ++it) {
-        ofs = creatingFile(it->first, temp);
+        ofs = creatingFile(it->first, _location);
         *ofs << it->second;
     }
     ofs->close();
     _code = 200;
 }
 
+void Methods::getPageContent(std::string &fileName) {
+    std::string temp;
+    std::ifstream ifs;
+    ifs.open(fileName.c_str());
+    if (!ifs.is_open()) {
+        std::cerr << "Error: can't open file: " << fileName << std::endl;
+        _code = 404;
+        return;
+    }
+    for (; !ifs.eof() ; ) {
+        std::getline(ifs, temp);
+        _page.append(temp);
+        _page.append("\n");
+    }
+    ifs.close();
+}
+
 void Methods::methodGet(Request &request, Config& config) {
     size_t i = 0;
-    Location temp = search_location(request.getPath(), config.getLocation());
-    for (; i < temp.getAllowedMethods().size(); ++i) {
-        if (!temp.getAllowedMethods()[i].compare("GET"))
+    Location _location = search_location(request.getPath(), config.getLocation());
+    for (; i < _location.getAllowedMethods().size(); ++i) {
+        if (!_location.getAllowedMethods()[i].compare("GET"))
             break;
     }
-    if (i == temp.getAllowedMethods().size()) {
+    if (i == _location.getAllowedMethods().size()) {
         _code = 405;
         return;
     }
     _method = GET;
-    std::string fileName = temp.getRoot().append(request.getPath());
+    std::string fileName = _location.getRoot().append(request.getPath());
     if (fileName[fileName.size() - 1] == '/') {
-        if (temp.getAutoIndex()) {
+        if (_location.getAutoIndex()) {
             _code = 200;
             _autoIndex = true;
             return;
         } else
-            fileName.append(temp.getIndex());
+            fileName.append(_location.getIndex());
     }
     if (!access(fileName.c_str(), 0)) {
+        getPageContent(fileName);
         _pagePath = fileName;
         _code = 200;
         return;
@@ -140,17 +160,17 @@ void Methods::methodGet(Request &request, Config& config) {
 
 void Methods::methodDelete(Request &request, Config &config) {
     size_t i = 0;
-    Location temp = search_location(request.getPath(), config.getLocation());
-    for (; i < temp.getAllowedMethods().size(); ++i) {
-        if (!temp.getAllowedMethods()[i].compare("GET"))
+    Location _location = search_location(request.getPath(), config.getLocation());
+    for (; i < _location.getAllowedMethods().size(); ++i) {
+        if (!_location.getAllowedMethods()[i].compare("GET"))
             break;
     }
-    if (i == temp.getAllowedMethods().size()) {
+    if (i == _location.getAllowedMethods().size()) {
         _code = 405;
         return;
     }
     _method = DELETE;
-    std::string fileName = temp.getRoot().append(request.getPath());
+    std::string fileName = _location.getRoot().append(request.getPath());
     if (remove(fileName.c_str()))
         _code = 404;
     _code = 200;
@@ -162,3 +182,8 @@ int Methods::getMethod() const { return _method; }
 int Methods::getCode() const { return _code; }
 
 bool Methods::getAutoIndex() const { return _autoIndex; }
+
+std::string Methods::getPagePath() const { return _pagePath; }
+
+
+std::string Methods::getPage() const { return _page; }

@@ -70,6 +70,8 @@ int Server::receive(int connection) {
     return (1);
 }
 
-int Server::send() {
+int Server::send(int connection) {
+    _response[connection] = Response(_requests[connection], *_config);
+
     return (1);
 }

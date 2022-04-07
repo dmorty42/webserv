@@ -4,6 +4,7 @@
 
 #include "Location.hpp"
 
+
 std::string parseIndex(std::string block) {
     size_t i[2];
     i[0] = block.find("index");

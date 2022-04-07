@@ -9,6 +9,7 @@
 
 class Request;
 class Config;
+class Response;
 
 class Server {
 private:
@@ -17,6 +18,7 @@ private:
     Config* _config;
     std::map<int, std::string> _buff;
     std::map<int, Request> _requests;
+    std::map<int, Response> _response;
 
 public:
     Server();
@@ -24,7 +26,7 @@ public:
     int setup(int& kq, ConfigParser& config, int index);
     int getSocket() const;
     int receive(int connection);
-    int send();
+    int send(int connection);
 
 };
 
