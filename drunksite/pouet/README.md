@@ -1,3 +1,4 @@
+
 # :white_check_mark: EXAM (project 2020-2021)
 Exams of the new graph.  
 Subjects are in the folder of each exercises, along with a solution and a test file.  
@@ -20,7 +21,7 @@ Original link to the subjects repository: [click](https://github.com/Glagan/42-e
 | Title | Description | Allowed functions | level of difficulty |
 |:-----:|-------------|-------------------|:-------------------:|
 | micro_paint |Write a program that will read an "operation file" and print the result in the terminal (rectangle)|fopen, fread, fscanf, fclose, write, malloc, calloc, realloc, free, memset, powf, sqrtf|:star::star::star:|
-| mini_paint |Write a program that will read an "operation file" and print the result in the terminal (circle)|fopen, fread, fscanf, fclose, write, malloc, calloc, realloc, free, memset, powf, sqrtf|:star::star::star:|
+| mini_paint |Write a program that will read an "operation file" and print the result in the terminal (circle)|fopen, fread, fscanf, fclose, write, malloc, calloc, realloc, free, memset, p¤ÈZàþowf, sqrtf|:star::star::star:|
 
 ### Running tests
 ![](https://github.com/markveligod/exam/raw/master/examRank03/img/micro.gif)
@@ -61,3 +62,5 @@ To check for leaked file descriptors, use the command `lsof -c microshell`. Pay 
 **:copyright:Authors:**  
   
 *[Mark Veligod](https://github.com/markveligod)*  
+
+--

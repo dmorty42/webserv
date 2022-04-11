@@ -2,3 +2,6 @@
 .DS_Store
 cmake-build-debug
 CMakeLists.txt
+.cmake
+CMakeFiles
+Testing

@@ -11,7 +11,9 @@ SRCS =	Cluster/Cluster.cpp\
         ConfigParser/ConfigParser.cpp\
         ConfigParser/Location.cpp\
         Methods/Methods.cpp\
+        Methods/MethodUtils.cpp\
         Response/Response.cpp\
+        AutoIndex/AutoIndex.cpp\
         main.cpp\
         Utils.cpp
 HDRS =	Webserv.hpp

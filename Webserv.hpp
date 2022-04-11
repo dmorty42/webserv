@@ -12,6 +12,7 @@
 #include <sys/poll.h>
 #include <sys/event.h>
 #include <sys/time.h>
+#include <dirent.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <iostream>
@@ -20,6 +21,7 @@
 #include <netinet/in.h>
 #include <map>
 #include <set>
+#include <sstream>
 #include "./ConfigParser/Config.hpp"
 #include "./ConfigParser/ConfigParser.hpp"
 #include "./ConfigParser/Location.hpp"
@@ -28,6 +30,7 @@
 #include "./Request/Request.hpp"
 #include "./Methods/Methods.hpp"
 #include "./Response/Response.hpp"
+#include "./AutoIndex/AutoIndex.hpp"
 
 enum METHODS {
     GET = 0,

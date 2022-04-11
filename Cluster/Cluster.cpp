@@ -47,8 +47,10 @@ int Cluster::run() {
                    setWriteFlag(_kq, fd);
                 }
             } else {
-                _connection[fd].send(fd); // need to implement
+                _connection[fd].send(fd);
                 _connection.erase(fd);
+//                setReadFlag(_kq, fd);
+                close(fd);
             }
         }
     }

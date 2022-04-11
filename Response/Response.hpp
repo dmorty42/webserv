@@ -16,6 +16,8 @@ private:
     std::string _body;
 
     void prepareGetHeader(Request& request, Config& config);
+    void preparePostHeader(Request& request, Config& config);
+    void prepareRedirectHeader(Request& request);
 public:
     Response();
     Response(Request& request, Config& config);
@@ -23,6 +25,7 @@ public:
 
     std::string getHeader() const;
     std::string getBody() const;
+    std::string getResponse();
 
 };
 

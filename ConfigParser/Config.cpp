@@ -13,8 +13,7 @@ std::string parseServerName(std::string configFile) {
     return ("default_server");
 }
 
-t_host parseHost(std::string configFile) {
-    t_host host;
+t_host Config::parseHost(std::string configFile) {
     size_t i[2];
     std::string temp;
     if (configFile.find("listen") != std::string::npos) {
@@ -23,6 +22,7 @@ t_host parseHost(std::string configFile) {
         host.port = std::stoi(temp.substr(i[0] + 1));
         i[1] = temp.find("listen") + 7;
         temp = temp.substr(i[1], i[0] - i[1]);
+        strHost = temp;
         host.host = inet_addr(temp.c_str());
         }
     return (host);
@@ -138,3 +138,5 @@ std::map <std::string, Location> Config::getLocation() const {
 }
 
 std::map<int, std::string> Config::getPages() const { return (pages); }
+
+std::string Config::getStrHost() const { return strHost; }

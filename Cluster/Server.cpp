@@ -44,27 +44,29 @@ int Server::setup(int& kq, ConfigParser& config, int index) {
 int Server::getSocket() const {return (_socket);}
 
 int Server::receive(int connection) {
-    char buff[2048];
-    int header, length, body;
-    int ret = ::recv(connection, buff, 2048, 0);
+    char buff[MEGA];
+    size_t header, length, body;
+    size_t ret = ::recv(connection, buff, MEGA, 0);
     if (ret < 1) {
         close(connection);
         if (ret < 0)
             perror("Receive: ");
-        else
+        else {
+            _buff.erase(connection);
             std::cout << "Client closed connection!" << std::endl;
+        }
         return (EXIT_FAILURE);
     }
-    _buff[connection].append(buff);
-    if ((header = _buff[connection].find("\r\n\r\n")) != (int)std::string::npos) {
-        if (( body =_buff[connection].find("Content-Length")) != (int)std::string::npos) {
+    _buff[connection].append(buff, ret);
+    if ((header = _buff[connection].find("\r\n\r\n")) != std::string::npos) {
+        if (( body =_buff[connection].find("Content-Length")) != std::string::npos) {
             body = std::stoi(_buff[connection].substr(body + 16));
-            length = _buff[connection].length();
+            length = _buff[connection].size();
             if (length < body + header + 4)
                 return 1;
         }
-        std::string str(buff);
-        _requests[connection] = Request(str, _config);
+        _requests[connection] = Request(_buff[connection], _config);
+        _buff.erase(connection);
         return (0);
     }
     return (1);
@@ -72,6 +74,9 @@ int Server::receive(int connection) {
 
 int Server::send(int connection) {
     _response[connection] = Response(_requests[connection], *_config);
-
+    ::send(connection, _response[connection].getResponse().c_str(),
+           _response[connection].getResponse().size(), 0);
+    _requests.erase(connection);
+    _response.erase(connection);
     return (1);
 }

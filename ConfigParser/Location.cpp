@@ -24,7 +24,7 @@ long parseBodySize(std::string block) {
         return (-1);
     i[0] += 24;
     i[1] = block.find("\n", i[0]);
-    return (atol(block.substr(i[0], i[1] - i[0]).c_str()));
+    return (std::stol(block.substr(i[0], i[1] - i[0])));
 }
 
 bool parseAutoIndex(std::string block) {
@@ -38,6 +38,21 @@ bool parseAutoIndex(std::string block) {
     return false;
 }
 
+t_redirect parseRedirect(std::string& block) {
+    t_redirect temp;
+    size_t i[2];
+    i[0] = block.find("return");
+    if (i[0] == std::string::npos) {
+        temp.code = 0;
+        return (temp);
+    }
+    i[1] = block.find(" ", i[0] + 7);
+    temp.code = stoi(block.substr(i[0] + 7, i[1] - i[0] - 7));
+    i[0] = block.find("\n", i[1] + 1);
+    temp.target = block.substr(i[1] + 1, i[0] - i[1] - 1);
+    return temp;
+}
+
 Location::Location(std::string block, std::string directory) {
     name = directory;
     root = parseRoot(block);
@@ -45,6 +60,7 @@ Location::Location(std::string block, std::string directory) {
     index = parseIndex(block);
     bodySize = parseBodySize(block) * MEGA;
     auto_index = parseAutoIndex(block);
+    redirect = parseRedirect(block);
 }
 
 
@@ -71,3 +87,5 @@ std::string Location::getName() const {
 }
 
 bool Location::getAutoIndex() const { return (auto_index); }
+
+t_redirect Location::getRedirect() const { return redirect; }

@@ -14,6 +14,7 @@ Request::Request(std::string& buff, Config* config) : _request(buff), _method(ft
                                     _body(buff.substr(buff.find("\r\n\r\n"))){
     _values = ft_values(buff);
     _methodCode = new Methods(*this, *config);
+    std::cout << _request;
 }
 
 // Getters

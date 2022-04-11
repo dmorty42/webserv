@@ -10,12 +10,18 @@
 
 class Config;
 
+typedef struct s_redirect {
+    int code;
+    std::string target;
+} t_redirect;
+
 class Location {
 private:
     std::string name;
     std::string root;
     std::vector<std::string> allowedMethods;
     std::string index;
+    t_redirect redirect;
     bool auto_index;
     long bodySize;
 public:
@@ -28,6 +34,7 @@ public:
     long getBodySize() const;
     std::string getName() const;
     bool getAutoIndex() const;
+    t_redirect getRedirect() const;
 };
 
 std::string parseIndex(std::string block);

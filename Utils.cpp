@@ -21,6 +21,7 @@ const Location &search_location(std::string path, const std::map<std::string, Lo
     LocIter it = locations.find(path);
     while (it == locations.end()){
         path.erase(path.rfind("/"));
+        it = locations.find(path);
         if (path.empty())
             return locations.find("/")->second;
     }
