@@ -5,10 +5,15 @@
 #include "Cluster.hpp"
 
 Cluster::Cluster() {
+    _env = NULL;
+}
+
+Cluster::Cluster(char **env) {
+    _env = env;
 }
 
 int Cluster::setup(const std::string &fileName) {
-    _config = new ConfigParser(fileName);
+    _config = new ConfigParser(fileName, _env);
     _kq = kqueue();
     for (size_t i = 0; i < _config->getConfig().size(); ++i) {
         Server newServer;

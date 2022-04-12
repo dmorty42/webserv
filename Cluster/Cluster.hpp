@@ -12,12 +12,14 @@ class ConfigParser;
 
 class Cluster {
 private:
+    char **_env;
     int _kq;
     ConfigParser* _config;
     std::map<int, Server> _listener;
     std::map<int, Server> _connection;
 public:
     Cluster();
+    Cluster(char **env);
     int setup(const std::string& fileName);
     int run();
 };

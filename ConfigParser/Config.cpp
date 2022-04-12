@@ -96,7 +96,8 @@ std::map<int, std::string> parsePages(std::string configFile) {
     return temp;
 }
 
-Config::Config(std::string configFile) {
+Config::Config(std::string configFile, char **env) {
+    _env = env;
     serverName = parseServerName(configFile);
     host = parseHost(configFile);
     allowedMethods = parseMethod(configFile);
@@ -109,6 +110,7 @@ Config::Config(){}
 Config::Config(const Config &other) {
     serverName = other.serverName;
     host = other.host;
+    strHost = other.strHost;
     pages = other.pages;
     allowedMethods = other.allowedMethods;
     location = other.location;
@@ -140,3 +142,5 @@ std::map <std::string, Location> Config::getLocation() const {
 std::map<int, std::string> Config::getPages() const { return (pages); }
 
 std::string Config::getStrHost() const { return strHost; }
+
+char **Config::getEnv() const { return _env; }

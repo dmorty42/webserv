@@ -15,6 +15,7 @@
 #include <dirent.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <iostream>
 #include <vector>
 #include "fstream"
@@ -31,6 +32,7 @@
 #include "./Methods/Methods.hpp"
 #include "./Response/Response.hpp"
 #include "./AutoIndex/AutoIndex.hpp"
+#include "./CgiHandler/CgiHandler.hpp"
 
 enum METHODS {
     GET = 0,
@@ -48,5 +50,8 @@ int setWriteFlag(int& kq, int& sock);
 int setReadFlag(int& kq, int& sock);
 const Location &search_location(std::string path,
                                 const std::map<std::string, Location> &locations);
+std::string IntToStr(int x);
+
+
 
 #endif

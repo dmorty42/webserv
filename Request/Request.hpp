@@ -14,10 +14,12 @@ private:
     std::string _request;
     std::string _method;
     std::string _path;
+    std::string _query;
     std::string _version;
     std::string _body;
     Methods *_methodCode;
     std::map<std::string, std::string> _values;
+    void checkQuery();
 public:
     Request();
     Request(std::string& buff, Config* config);
@@ -29,6 +31,7 @@ public:
     std::string getBody() const;
     Methods getMethodCode() const;
     std::map<std::string, std::string> getValues() const;
+    std::string getQuery() const;
 };
 
 std::string ft_method(std::string& buff);

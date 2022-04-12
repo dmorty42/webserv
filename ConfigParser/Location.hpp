@@ -23,6 +23,7 @@ private:
     std::string index;
     t_redirect redirect;
     bool auto_index;
+    bool cgi;
     long bodySize;
 public:
     Location() {};
@@ -35,6 +36,7 @@ public:
     std::string getName() const;
     bool getAutoIndex() const;
     t_redirect getRedirect() const;
+    bool getCgi() const;
 };
 
 std::string parseIndex(std::string block);

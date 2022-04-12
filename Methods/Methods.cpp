@@ -30,6 +30,8 @@ Methods::Methods(Request &request, Config& config) {
                                         config.getLocation());
     if (location.getRedirect().code != 0) {
         methodRedirect(request, location);
+    } else if (location.getCgi()) {
+        CgiHandler temp(request, config);
     } else {
         for (int i = 0; i < 3; ++i) {
             if (!request.getMethod().compare(_allowedMethods[i])) {

@@ -28,3 +28,8 @@ const Location &search_location(std::string path, const std::map<std::string, Lo
     return locations.find(path)->second;
 }
 
+std::string IntToStr(int x) {
+    std::stringstream ss;
+    ss << x;
+    return ss.str();
+}

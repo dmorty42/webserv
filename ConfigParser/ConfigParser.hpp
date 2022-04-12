@@ -13,7 +13,7 @@ class ConfigParser {
 private:
     std::vector<Config> config;
 public:
-    ConfigParser(std::string configFile);
+    ConfigParser(std::string configFile, char **env);
     std::vector<Config> getConfig() const;
 };
 

@@ -4,7 +4,7 @@
 
 #include "ConfigParser.hpp"
 
-ConfigParser::ConfigParser(std::string configFile) {
+ConfigParser::ConfigParser(std::string configFile, char **env) {
     std::ifstream ifs;
     ifs.open(configFile.c_str());
     std::vector<bool> brackets;
@@ -25,7 +25,7 @@ ConfigParser::ConfigParser(std::string configFile) {
         line.append(temp);
         line.append("\n");
         if (brackets.size() != 0 && brackets[0] == true) {
-           config.push_back(Config(line));
+           config.push_back(Config(line, env));
            line.clear();
            brackets.clear();
         }

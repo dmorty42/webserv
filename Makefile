@@ -14,6 +14,7 @@ SRCS =	Cluster/Cluster.cpp\
         Methods/MethodUtils.cpp\
         Response/Response.cpp\
         AutoIndex/AutoIndex.cpp\
+        CgiHandler/CgiHandler.cpp\
         main.cpp\
         Utils.cpp
 HDRS =	Webserv.hpp

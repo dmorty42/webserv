@@ -16,6 +16,7 @@ private:
     std::string serverName;
     t_host host;
     std::string strHost;
+    char **_env;
     std::map<int, std::string> pages;
     std::vector<std::string> allowedMethods;
     std::map<std::string, Location> location;
@@ -23,7 +24,7 @@ private:
     t_host parseHost(std::string configFile);
 public:
     Config();
-    Config(std::string configFile);
+    Config(std::string configFile, char** env);
     Config(const Config& other);
     Config& operator=(const Config& other);
     std::string getServerName() const;
@@ -32,6 +33,7 @@ public:
     std::vector<std::string> getAllowedMethods() const;
     std::map<std::string, Location> getLocation() const;
     std::map<int, std::string> getPages() const;
+    char **getEnv() const;
 };
 
 std::string parseServerName(std::string configFile);

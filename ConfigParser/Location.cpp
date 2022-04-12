@@ -53,6 +53,19 @@ t_redirect parseRedirect(std::string& block) {
     return temp;
 }
 
+bool parseCgi(std::string& block) {
+    std::string temp;
+    size_t i[2];
+    i[0] = block.find("cgi");
+    if (i[0] == std::string::npos)
+        return false;
+    i[1] = block.find('\n', i[0]);
+    temp = block.substr(i[0] + 4, i[1] - i[0] - 4);
+    if (!temp.compare("on"))
+        return true;
+    return false;
+}
+
 Location::Location(std::string block, std::string directory) {
     name = directory;
     root = parseRoot(block);
@@ -61,6 +74,7 @@ Location::Location(std::string block, std::string directory) {
     bodySize = parseBodySize(block) * MEGA;
     auto_index = parseAutoIndex(block);
     redirect = parseRedirect(block);
+    cgi = parseCgi(block);
 }
 
 
@@ -89,3 +103,5 @@ std::string Location::getName() const {
 bool Location::getAutoIndex() const { return (auto_index); }
 
 t_redirect Location::getRedirect() const { return redirect; }
+
+bool Location::getCgi() const { return cgi; }
