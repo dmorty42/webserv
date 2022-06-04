@@ -54,7 +54,7 @@ int Cluster::run() {
             } else {
                 _connection[fd].send(fd);
                 _connection.erase(fd);
-//                setReadFlag(_kq, fd);
+//              setReadFlag(_kq, fd);
                 close(fd);
             }
         }

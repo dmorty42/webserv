@@ -33,7 +33,8 @@ std::map<std::string, std::string> ft_values(std::string& buff) {
         str = buff.substr(i[0] + 1, i[1] - i[0] - 2);
         i[3] = str.find(":");
         key = str.substr(0, i[3]);
-        value = str.substr(i[3] + 2);
+        if (buff.find("POST") != std::string::npos)
+            value = str.substr(i[3] + 2);
         temp[key] = value;
         i[0] = buff.find("\n", i[0] + 1);
         if (i[0] == std::string::npos || !key.compare("Cookie"))

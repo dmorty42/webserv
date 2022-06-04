@@ -75,8 +75,9 @@ Response::Response(Request &request, Config& config) {
     if (request.getMethodCode().getCode() == 301 ||
         request.getMethodCode().getCode() == 307)
         prepareRedirectHeader(request);
-    else if (!request.getMethodCode().getMethod().compare("GET"))
+    else if (!request.getMethodCode().getMethod().compare("GET")) {
         prepareGetHeader(request, config);
+    }
     else if (!request.getMethodCode().getMethod().compare("POST"))
         preparePostHeader(request, config);
 }

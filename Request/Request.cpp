@@ -16,7 +16,6 @@ Request::Request(std::string& buff, Config* config) : _request(buff), _method(ft
     _values = ft_values(buff);
     checkQuery();
     _methodCode = new Methods(*this, *config);
-    std::cout << _request;
 }
 
 void Request::checkQuery() {
