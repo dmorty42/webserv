@@ -9,13 +9,13 @@ Request::Request() {}
 Request::~Request() {}
 
 
-Request::Request(std::string& buff, Config* config) : _request(buff), _method(ft_method(buff)),
+Request::Request(std::string& buff, Config* config, int con) : _request(buff), _method(ft_method(buff)),
                                     _path(ft_path(buff)), _query(""),
                                     _version(ft_version(buff)),
                                     _body(buff.substr(buff.find("\r\n\r\n"))){
     _values = ft_values(buff);
     checkQuery();
-    _methodCode = new Methods(*this, *config);
+    _methodCode = new Methods(*this, *config, con);
 }
 
 void Request::checkQuery() {

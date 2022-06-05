@@ -13,12 +13,14 @@ private:
     void prepareEnv(Request& request, Config& config);
     char **mapEnvToArray();
     void handleCgi();
+    int con;
 public:
     CgiHandler();
     CgiHandler(const CgiHandler& other);
     CgiHandler& operator=(const CgiHandler& other);
     ~CgiHandler();
-    CgiHandler(Request& request, Config& config);
+    CgiHandler(Request& request, Config& config, int con);
+    std::string readFile(std::string file);
 };
 
 

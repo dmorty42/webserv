@@ -21,7 +21,8 @@ CgiHandler &CgiHandler::operator=(const CgiHandler &other) {
 
 CgiHandler::~CgiHandler() {}
 
-CgiHandler::CgiHandler(Request &request, Config &config) {
+CgiHandler::CgiHandler(Request &request, Config &config, int con) {
+    this->con = con;
     prepareEnv(request, config);
     handleCgi();
 }
@@ -84,10 +85,36 @@ void CgiHandler::handleCgi() {
         temp[0] = strdup("/usr/local/bin/python3");
         temp[1] = strdup(fileName.c_str());
         temp[2] = NULL;
+
+        int fd = open("ilnur", O_CREAT | O_RDWR | O_TRUNC, 0666);
+        dup2(fd, 1);
+
         execve(temp[0], temp, mapEnvToArray());
         std::cerr << "Execve crashed...";
         exit(EXIT_FAILURE);
     } else if (pid > 0) {
         waitpid(pid, &i, 0);
+        std::string file = readFile("ilnur");
+        send(con, file.c_str(), strlen(file.c_str()), 0);
     }
+}
+
+std::string CgiHandler::readFile(std::string file) {
+	char buffer[1024];
+	int fd;
+	int res;
+	std::string result;
+
+    memset(buffer, '\0', 1024);
+	fd = open(file.c_str(), O_RDONLY);
+	// if (fd < -1)
+	// 	std::cout << "Error" << std::endl;
+	while ((res = read(fd, buffer, 1024)) > 0) {
+		result += buffer;
+		memset(buffer, '\0', 1024);
+	}
+	// if (res < 0)
+    //     std::cout << "Error" << std::endl;
+	close(fd);
+	return (result);
 }

@@ -32,6 +32,8 @@ std::map<std::string, std::string> ft_values(std::string& buff) {
         i[1] = buff.find("\n", i[0] + 1);
         str = buff.substr(i[0] + 1, i[1] - i[0] - 2);
         i[3] = str.find(":");
+        if (i[3] < 0 || i[3] >= buff.length())
+            break;
         key = str.substr(0, i[3]);
         if (buff.find("POST") != std::string::npos)
             value = str.substr(i[3] + 2);

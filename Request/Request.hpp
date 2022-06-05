@@ -22,7 +22,7 @@ private:
     void checkQuery();
 public:
     Request();
-    Request(std::string& buff, Config* config);
+    Request(std::string& buff, Config* config, int con);
     ~Request();
     std::string getRequest() const;
     std::string getMethod() const;

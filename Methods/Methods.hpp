@@ -28,7 +28,7 @@ private:
 
 public:
     Methods();
-    Methods(Request& request, Config& config);
+    Methods(Request& request, Config& config, int con);
     ~Methods();
     int getCode() const;
     std::string getMethod() const;

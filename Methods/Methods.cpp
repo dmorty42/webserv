@@ -16,7 +16,7 @@ Methods::Methods() {
     fprt[2] = &Methods::methodDelete;
 }
 
-Methods::Methods(Request &request, Config& config) {
+Methods::Methods(Request &request, Config& config, int con) {
     _allowedMethods[0] = "GET";
     _allowedMethods[1] = "POST";
     _allowedMethods[2] = "DELETE";
@@ -31,7 +31,7 @@ Methods::Methods(Request &request, Config& config) {
     if (location.getRedirect().code != 0) {
         methodRedirect(request, location);
     } else if (location.getCgi()) {
-        CgiHandler temp(request, config);
+        CgiHandler temp(request, config, con);
     } else {
         for (int i = 0; i < 3; ++i) {
             if (!request.getMethod().compare(_allowedMethods[i])) {

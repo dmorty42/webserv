@@ -47,6 +47,7 @@ int Server::receive(int connection) {
     char buff[MEGA];
     size_t header, length, body;
     size_t ret = ::recv(connection, buff, MEGA, 0);
+    // std::cout << "!\n" << buff << "!\n" << std::endl;
     if (ret < 1) {
         close(connection);
         if (ret < 0)
@@ -65,7 +66,7 @@ int Server::receive(int connection) {
             if (length < body + header + 4)
                 return 1;
         }
-        _requests[connection] = Request(_buff[connection], _config);
+        _requests[connection] = Request(_buff[connection], _config, connection);
         _buff.erase(connection);
         return (0);
     }
@@ -80,3 +81,4 @@ int Server::send(int connection) {
     _response.erase(connection);
     return (1);
 }
+
