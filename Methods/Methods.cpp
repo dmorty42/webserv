@@ -75,7 +75,7 @@ void Methods::methodPost(Request &request, Config &config, Location& location) {
         return;
     }
     if (request.getValues()["Content-Type"].find("multipart") != std::string::npos) {
-        delim = request.getValues()["Content-Type"].substr(
+        delim = "\n\r\n--" + request.getValues()["Content-Type"].substr(
                 request.getValues()["Content-Type"].find("boundary") + 9);
         body = splitBody(request.getBody(), delim);
     } else {

@@ -17,7 +17,7 @@ std::map<std::string, std::string> splitBody(const std::string& body, const std:
         z[0] = body.find("Content-Type", i);
         z[0] = body.find('\n', z[0]) + 2;
         i = body.find(delim, i + 1);
-        temp[filename] = body.substr(z[0], i - z[0]);
+        temp[filename] = body.substr(z[0] + 1, i - z[0]);
     }
     return temp;
 }
