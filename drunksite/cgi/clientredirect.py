@@ -22,7 +22,7 @@ if like and dontlike:
     print '<head>'
     print '<title>Coucouuu haan</title>'
     print '</head>'
-    print '<body>'
+    print '<body bgcolor="a2a2a2">'
     print "<h2>Please click only one checkbox.</h2>"
     print "<li><a href=\"/test_cgi.html\">retour</a></li>"
     print '</body>'

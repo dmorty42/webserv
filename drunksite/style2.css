@@ -28,10 +28,10 @@
 
 
 body{
-   background-image: url('images/fond_jaune.png');
+   background-image: url('images/background1.jpeg');
    width: 80%;
    margin:auto;
-   color: #181818;
+   color: #424141;
 }
 
 
@@ -144,12 +144,12 @@ li a:hover
 
 
 #fond_ecran{
-    background-image: url(images/sanfrancisco.jpg);
+    background-image: url(images/mill.jpeg);
     position: relative;
     margin-top: 15px;
     height: 210px;
     border-radius: 10px;
-    box-shadow: 11px 2px 26px 6px rgba(0,0,0,0.77)
+    box-shadow: 11px 2px 26px 6px rgba(20, 22, 23, 0.77)
 }
 
 #message{
@@ -229,7 +229,7 @@ article p{
 aside{
     margin-top: 90px;
     height: 380px;
-    background-color: rgb(111, 106, 99);
+    background-color: rgb(142, 181, 169);
     padding: 0 6px 0 6px;
     border-radius: 8px;
 

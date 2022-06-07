@@ -30,7 +30,7 @@
 
 
 body{
-    background-image: url('images/fond_jaune.png');
+    background-image: url('images/background1.jpeg');
     width: 75%;
     margin:auto;
     color: #181818;
@@ -110,12 +110,12 @@ li a:hover
 /* ////////////// FOND ECRAN */
 
 #fond_ecran{
-    background-image: url(images/sanfrancisco.jpg);
+    background-image: url(images/mill.jpeg);
 
     position: relative;
     margin-top: 35px;
     margin-left: 25%;
-    width: 53%;
+    width: 37%;
     height: 210px;
     border-radius: 10px;
     box-shadow: 11px 2px 26px 6px rgba(0,0,0,0.77)
@@ -204,7 +204,7 @@ aside{
     margin-right: 100px;
     width: 700px;
     height: 70%;
-    background-color: rgb(111, 106, 99);
+    background-color: rgb(132, 169, 176);
     padding: 0 20px 20px 20px;
     border-radius: 8px;
 
