@@ -1,0 +1,11 @@
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Coucouuu haan</title>
+</head>
+<body>
+<h2>Please click to one checkbox at least.</h2><li><a href="/test_cgi.html">retour</a></li></body>
+</html>

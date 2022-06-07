@@ -82,7 +82,10 @@ void CgiHandler::handleCgi() {
     if (!pid) {
         std::string fileName = _env["SCRIPT_NAME"];
         char *temp[3];
-        temp[0] = strdup("/usr/local/bin/python3");
+        if (fileName.find(".py") != std::string::npos)
+            temp[0] = strdup("/usr/local/bin/python3");
+        else
+            temp[0] = strdup("/usr/bin/perl");
         temp[1] = strdup(fileName.c_str());
         temp[2] = NULL;
 
