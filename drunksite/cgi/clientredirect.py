@@ -22,9 +22,9 @@ if like and dontlike:
     print '<head>'
     print '<title>Coucouuu haan</title>'
     print '</head>'
-    print '<body bgcolor="a2a2a2">'
+    print '<body bgcolor="a2a2a2" leftmargin="42" topmargin="42">'
     print "<h2>Please click only one checkbox.</h2>"
-    print "<li><a href=\"/test_cgi.html\">retour</a></li>"
+    print "<li><a href=\"/test_cgi.html\">return</a></li>"
     print '</body>'
     print '</html>'
 elif like :
@@ -43,6 +43,6 @@ else :
     print '</head>'
     print '<body>'
     print "<h2>Please click to one checkbox at least.</h2>"
-    print "<li><a href=\"/test_cgi.html\">retour</a></li>"
+    print "<li><a href=\"/test_cgi.html\">return</a></li>"
     print '</body>'
     print '</html>'

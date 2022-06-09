@@ -40,15 +40,15 @@ if ( $like_flag eq "on" and $dontlike_flag eq "on" ) {
     print ("<head>\n");
     print ("<title>Coucouuu haan</title>\n");
     print ("</head>\n");
-    print ("<body>\n");
+    print ("<body bgcolor=\"a2a2a2\" leftmargin=\"42\" topmargin=\"42\">\n");
     print ("<h2>Please click only one checkbox.</h2>");
-    print ("<li><a href=\"/test_cgi.html\">retour</a></li>");
+    print ("<li><a href=\"/test_cgi.html\">return</a></li>");
     print ("</body>\n");
     print ("</html>\n");
 }
 elsif ( $like_flag eq "on" ) {
     print ("HTTP/1.1 302 Found\r\n");
-    print ("Location:/images/sanfrancisco.jpg\r\n\r\n");
+    print ("Location:/images/kazan1.jpeg\r\n\r\n");
 }
 elsif ( $dontlike_flag eq "on" ) {
     print ("HTTP/1.1 302 Found\r\n");
@@ -64,7 +64,7 @@ else {
     print ("</head>\n");
     print ("<body>\n");
     print ("<h2>Please click to one checkbox at least.</h2>");
-    print ("<li><a href=\"/test_cgi.html\">retour</a></li>");
+    print ("<li><a href=\"/test_cgi.html\">return</a></li>");
     print ("</body>\n");
     print ("</html>\n");
 }

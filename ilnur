@@ -1,28 +1,11 @@
 HTTP/1.1 200 OK
 Content-Type: text/html
 
-
+<!DOCTYPE html>
 <html>
 <head>
-<title>CGI environment</title>
+<title>Coucouuu haan</title>
 </head>
-<body bgcolor="a2a2a2">
-<h2>Below are all environment variables given to printenv.py</h2>
-<font size=+1>Environment</font><br>
-<b>VERSIONER_PYTHON_PREFER_32_BIT</b>: no<br>
-<b>         SERVER_NAME</b>: youpi<br>
-<b>         REMOTE_ADDR</b>: 0.0.0.0<br>
-<b>   GATEWAY_INTERFACE</b>: CGI/1.1<br>
-<b>     SERVER_SOFTWARE</b>: webserv/1.1<br>
-<b>         SCRIPT_NAME</b>: drunksite/cgi/printenv.py<br>
-<b>__CF_USER_TEXT_ENCODING</b>: 0xF7416:0x0:0x0<br>
-<b>      REQUEST_METHOD</b>: GET<br>
-<b>VERSIONER_PYTHON_VERSION</b>: 2.7<br>
-<b>     PATH_TRANSLATED</b>: /cgi/printenv.py<br>
-<b>         SERVER_PORT</b>: 8000<br>
-<b>     SERVER_PROTOCOL</b>: HTTP/1.1<br>
-<b>        QUERY_STRING</b>: <br>
-<b>         REMOTE_HOST</b>: 0.0.0.0<br>
-<b>           PATH_INFO</b>: /cgi/printenv.py<br>
-</body>
+<body bgcolor="a2a2a2" leftmargin="42" topmargin="42">
+<h2>Please click only one checkbox.</h2><li><a href="/test_cgi.html">return</a></li></body>
 </html>

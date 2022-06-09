@@ -11,7 +11,7 @@ print '<html>'
 print '<head>'
 print '<title>CGI environment</title>'
 print '</head>'
-print '<body bgcolor="a2a2a2">'
+print '<body bgcolor="a2a2a2" leftmargin="42" topmargin="42">'
 print '<h2>Below are all environment variables given to printenv.py</h2>'
 print "<font size=+1>Environment</font><br>"
 for param in os.environ.keys():
