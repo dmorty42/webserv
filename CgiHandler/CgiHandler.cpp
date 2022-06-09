@@ -81,11 +81,15 @@ void CgiHandler::handleCgi() {
     }
     if (!pid) {
         std::string fileName = _env["SCRIPT_NAME"];
+        std::cout << fileName << std::endl;
         char *temp[3];
+        std::cout << fileName << std::endl;
         if (fileName.find(".py") != std::string::npos)
-            temp[0] = strdup("/usr/local/bin/python3");
-        else
+            temp[0] = strdup("/usr/bin/python");
+        else if (fileName.find(".pl") != std::string::npos)
             temp[0] = strdup("/usr/bin/perl");
+        else
+            temp[0] = strdup("/usr/bin/php");
         temp[1] = strdup(fileName.c_str());
         temp[2] = NULL;
 
@@ -93,7 +97,7 @@ void CgiHandler::handleCgi() {
         dup2(fd, 1);
 
         execve(temp[0], temp, mapEnvToArray());
-        std::cerr << "Execve crashed...";
+        std::cerr << "Execve crashed...\n";
         exit(EXIT_FAILURE);
     } else if (pid > 0) {
         waitpid(pid, &i, 0);
