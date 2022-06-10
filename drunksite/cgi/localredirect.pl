@@ -38,7 +38,7 @@ if ( $like_flag eq "on" and $dontlike_flag eq "on" ) {
     print ("<!DOCTYPE html>\n");
     print ("<html>\n");
     print ("<head>\n");
-    print ("<title>Coucouuu haan</title>\n");
+    print ("<title>checkbox problem</title>\n");
     print ("</head>\n");
     print ("<body bgcolor=\"a2a2a2\" leftmargin=\"42\" topmargin=\"42\">\n");
     print ("<h2>Please click only one checkbox.</h2>");
@@ -52,7 +52,7 @@ elsif ( $like_flag eq "on" ) {
 }
 elsif ( $dontlike_flag eq "on" ) {
     print ("HTTP/1.1 302 Found\r\n");
-    print ("Location:/zozor_site.html\r\n\r\n");
+    print ("Location:/kazan_site.html\r\n\r\n");
 }
 else {
     print ("HTTP/1.1 200 OK\r\n");
@@ -60,7 +60,7 @@ else {
     print ("<!DOCTYPE html>\n");
     print ("<html>\n");
     print ("<head>\n");
-    print ("<title>Coucouuu haan</title>\n");
+    print ("<title>checkbox problem</title>\n");
     print ("</head>\n");
     print ("<body>\n");
     print ("<h2>Please click to one checkbox at least.</h2>");

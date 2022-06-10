@@ -6,7 +6,10 @@
 
 Request::Request() {}
 
-Request::~Request() {}
+Request::~Request() {
+    // if (_methodCode)
+    //     delete _methodCode;
+}
 
 
 Request::Request(std::string& buff, Config* config, int con) : _request(buff), _method(ft_method(buff)),

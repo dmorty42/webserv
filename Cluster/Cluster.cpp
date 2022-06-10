@@ -12,6 +12,12 @@ Cluster::Cluster(char **env) {
     _env = env;
 }
 
+Cluster::~Cluster()
+{
+    if (_config)
+        delete _config;
+}
+
 int Cluster::setup(const std::string &fileName) {
     _config = new ConfigParser(fileName, _env);
     _kq = kqueue();

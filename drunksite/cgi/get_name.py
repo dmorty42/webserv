@@ -19,7 +19,7 @@ print ('Content-Type: text/html\r\n\r\n')
 #print '<!DOCTYPE html>'
 print ('<html>')
 print ('<head>')
-print ('<title>Coucouuu haan</title>')
+print ('<title>checkbox problem</title>')
 print ('</head>')
 print ('<body  bgcolor="a2a2a2">') 
 print ('<h2 align="center"> Hello you... Do you wonder what are your name & last name ? Check it out below</h2>')

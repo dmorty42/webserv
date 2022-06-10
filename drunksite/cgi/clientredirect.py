@@ -20,7 +20,7 @@ if like and dontlike:
     print '<!DOCTYPE html>'
     print '<html>'
     print '<head>'
-    print '<title>Coucouuu haan</title>'
+    print '<title>checkbox problem</title>'
     print '</head>'
     print '<body bgcolor="a2a2a2" leftmargin="42" topmargin="42">'
     print "<h2>Please click only one checkbox.</h2>"
@@ -39,7 +39,7 @@ else :
     print '<!DOCTYPE html>'
     print '<html>'
     print '<head>'
-    print '<title>Coucouuu haan</title>'
+    print '<title>checkbox problem</title>'
     print '</head>'
     print '<body>'
     print "<h2>Please click to one checkbox at least.</h2>"

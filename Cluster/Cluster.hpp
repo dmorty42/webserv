@@ -20,6 +20,7 @@ private:
 public:
     Cluster();
     Cluster(char **env);
+    virtual ~Cluster();
     int setup(const std::string& fileName);
     int run();
 };
