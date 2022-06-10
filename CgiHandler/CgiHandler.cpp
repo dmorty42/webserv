@@ -91,7 +91,7 @@ void CgiHandler::handleCgi() {
         temp[1] = strdup(fileName.c_str());
         temp[2] = NULL;
 
-        int fd = open("drunksite/.ilnur", O_CREAT | O_RDWR | O_TRUNC, 0666);
+        int fd = open("drunksite/.ilnur.txt", O_CREAT | O_RDWR | O_TRUNC, 0666);
         dup2(fd, 1);
 
         execve(temp[0], temp, mapEnvToArray());
@@ -99,7 +99,7 @@ void CgiHandler::handleCgi() {
         exit(EXIT_FAILURE);
     } else if (pid > 0) {
         waitpid(pid, &i, 0);
-        std::string file = readFile("drunksite/.ilnur");
+        std::string file = readFile("drunksite/.ilnur.txt");
         send(con, file.c_str(), strlen(file.c_str()), 0);
     }
 }
@@ -121,6 +121,6 @@ std::string CgiHandler::readFile(std::string file) {
 	// if (res < 0)
     //     std::cout << "Error" << std::endl;
 	close(fd);
-    std::cout << result << std::endl;
+    // std::cout << result << std::endl;
 	return (result);
 }

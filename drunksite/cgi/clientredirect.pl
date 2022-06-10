@@ -62,7 +62,7 @@ else {
     print ("<head>\n");
     print ("<title>checkbox problem</title>\n");
     print ("</head>\n");
-    print ("<body>\n");
+    print ("<body bgcolor=\"a2a2a2\" leftmargin=\"42\" topmargin=\"42\">\n");
     print ("<h2>Please click to one checkbox at least.</h2>");
     print ("<li><a href=\"/test_cgi.html\">return</a></li>");
     print ("</body>\n");

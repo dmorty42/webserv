@@ -41,7 +41,7 @@ else :
     print '<head>'
     print '<title>checkbox problem</title>'
     print '</head>'
-    print '<body>'
+    print '<body bgcolor="a2a2a2" leftmargin="42" topmargin="42">'
     print "<h2>Please click to one checkbox at least.</h2>"
     print "<li><a href=\"/test_cgi.html\">return</a></li>"
     print '</body>'
