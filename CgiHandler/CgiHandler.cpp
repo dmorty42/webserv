@@ -121,5 +121,6 @@ std::string CgiHandler::readFile(std::string file) {
 	// if (res < 0)
     //     std::cout << "Error" << std::endl;
 	close(fd);
+    std::cout << result << std::endl;
 	return (result);
 }
