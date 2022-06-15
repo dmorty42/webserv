@@ -33,7 +33,7 @@ $(NAME): $(OBJS) $(HDRS)
 	$(CC) $(SRCS) -o $(NAME)
 
 clean:
-	rm -f $(OBJS) drunksite/.ilnur.txt
+	rm -f $(OBJS) drunksite/.ilnur.txt drunksite/downloads/*
 
 fclean: clean
 	rm -f $(NAME)
