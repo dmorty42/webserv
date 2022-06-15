@@ -105,17 +105,15 @@ void CgiHandler::handleCgi() {
 }
 
 std::string CgiHandler::readFile(std::string file) {
-	char buffer[1024];
-	int fd;
-	int res;
 	std::string result;
+    std::string line;
 
-    memset(buffer, '\0', 1024);
-	fd = open(file.c_str(), O_RDONLY);
-	while ((res = read(fd, buffer, 1024)) > 0) {
-		result += buffer;
-		memset(buffer, '\0', 1024);
-	}
-	close(fd);
+    std::ifstream fileStream(file);
+    while (!fileStream.eof())
+    {
+        std::getline(fileStream, line);
+        result += line + "\r\n";
+    }
+    fileStream.close();
 	return (result);
 }
