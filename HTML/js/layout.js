@@ -1,6 +1,5 @@
 var Layout = function () {
     
-    // detect mobile device
     var isMobileDevice = function() {
         return  ((
             navigator.userAgent.match(/Android/i) ||
@@ -11,7 +10,6 @@ var Layout = function () {
         ) ? true : false);
     }
 
-    // handle on page scroll
     var handleHeaderOnScroll = function() {
         if ($(window).scrollTop() > 60) {
             $("body").addClass("page-on-scroll");
@@ -20,9 +18,8 @@ var Layout = function () {
         }
     }
 
-    // Handle Header
     var handleOnePageHeader = function() {
-        // jQuery to collapse the navbar on scroll
+
         if ($('.navbar').offset().top > 150) {
             $('.navbar-fixed-top').addClass('top-nav-collapse');
         }
@@ -37,7 +34,6 @@ var Layout = function () {
         var $offset = 0;
         $offset = $(".navbar-fixed-top").height()-20;
         
-        // jQuery for page scrolling feature - requires jQuery Easing plugin
         $('.js_nav-item a').bind('click', function(event) {
             var $position = $($(this).attr('href')).offset().top;
             $('html, body').stop().animate({
@@ -48,13 +44,11 @@ var Layout = function () {
 
         var $scrollspy = $('body').scrollspy({target: '.navbar-fixed-top', offset: $offset+2});
 
-        // Collapse Navbar When It's Clickicked
         $(window).scroll(function() {
             $('.navbar-collapse.in').collapse('hide');
         });
     }
 
-    // handle carousel
     var handleCarousel = function() {
         var $item = $('.carousel .item'); 
         var $wHeight = $(window).height();
@@ -78,7 +72,6 @@ var Layout = function () {
         });
     }
 
-    // handle group element heights
     var handleHeight = function() {
        $('[data-auto-height]').each(function() {
             var parent = $(this);
@@ -118,19 +111,16 @@ var Layout = function () {
 
     return {
         init: function () {
-            // initial setup for fixed header
             handleHeaderOnScroll();
-            handleOnePageHeader(); // initial header
-            handleCarousel(); // initial setup for carousel
-            handleHeight(); // initial setup for group element height
+            handleOnePageHeader();
+            handleCarousel();
+            handleHeight();
             
-            // handle minimized header on page scroll
             $(window).scroll(function() {
                 handleHeaderOnScroll();
             });
         },
 
-        // To get the correct viewport width based on  http://andylangton.co.uk/articles/javascript/get-viewport-size-javascript/
         getViewPort: function() {
             var e = window,
                 a = 'inner';

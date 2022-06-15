@@ -1,36 +1,21 @@
-// SmoothScroll for websites v1.2.1
-// Licensed under the terms of the MIT license.
-// https://gist.github.com/galambalazs/6477177/
-
-// People involved
-//  - Balazs Galambosi (maintainer)  
-//  - Michael Herf     (Pulse Algorithm)
- 
 (function(){
   
-// Scroll Variables (tweakable)
 var defaultOptions = {
  
-    // Scrolling Core
-    frameRate        : 150, // [Hz]
-    animationTime    : 400, // [px]
-    stepSize         : 120, // [px]
+    frameRate        : 150,
+    animationTime    : 400,
+    stepSize         : 120,
  
-    // Pulse (less tweakable)
-    // ratio of "tail" to "acceleration"
     pulseAlgorithm   : true,
     pulseScale       : 8,
     pulseNormalize   : 1,
  
-    // Acceleration
-    accelerationDelta : 20,  // 20
-    accelerationMax   : 1,   // 1
+    accelerationDelta : 20,
+    accelerationMax   : 1,
  
-    // Keyboard Settings
-    keyboardSupport   : true,  // option
-    arrowScroll       : 50,     // [px]
+    keyboardSupport   : true,
+    arrowScroll       : 50,
  
-    // Other
     touchpadSupport   : true,
     fixedBackground   : true, 
     excluded          : ""    
@@ -39,7 +24,6 @@ var defaultOptions = {
 var options = defaultOptions;
  
  
-// Other Variables
 var isExcluded = false;
 var isFrame = false;
 var direction = { x: 0, y: 0 };
@@ -53,25 +37,13 @@ var key = { left: 37, up: 38, right: 39, down: 40, spacebar: 32,
             pageup: 33, pagedown: 34, end: 35, home: 36 };
  
  
-/***********************************************
- * SETTINGS
- ***********************************************/
- 
 var options = defaultOptions;
- 
- 
-/***********************************************
- * INITIALIZE
- ***********************************************/
- 
-/**
- * Tests if smooth scrolling is allowed. Shuts down everything if not.
- */
+
+
 function initTest() {
  
     var disableKeyboard = false; 
     
-    // disable keyboard support if anything above requested it
     if (disableKeyboard) {
         removeEvent("keydown", keydown);
     }
@@ -81,9 +53,6 @@ function initTest() {
     }
 }
  
-/**
- * Sets up scrolls array, determines if frames are involved.
- */
 function init() {
   
     if (!document.body) return;
@@ -93,42 +62,33 @@ function init() {
     var windowHeight = window.innerHeight; 
     var scrollHeight = body.scrollHeight;
     
-    // check compat mode for root element
     root = (document.compatMode.indexOf('CSS') >= 0) ? html : body;
     activeElement = body;
     
     initTest();
     initDone = true;
  
-    // Checks if this script is running in a frame
     if (top != self) {
         isFrame = true;
     }
  
-    /**
-     * This fixes a bug where the areas left and right to 
-     * the content does not trigger the onmousewheel event
-     * on some pages. e.g.: html, body { height: 100% }
-     */
     else if (scrollHeight > windowHeight &&
             (body.offsetHeight <= windowHeight || 
              html.offsetHeight <= windowHeight)) {
  
-        // DOMChange (throttle): fix height
         var pending = false;
         var refresh = function () {
             if (!pending && html.scrollHeight != document.height) {
-                pending = true; // add a new pending action
+                pending = true;
                 setTimeout(function () {
                     html.style.height = document.height + 'px';
                     pending = false;
-                }, 500); // act rarely to stay fast
+                }, 500);
             }
         };
         html.style.height = 'auto';
         setTimeout(refresh, 10);
  
-        // clearfix
         if (root.offsetHeight <= windowHeight) {
             var underlay = document.createElement("div"); 	
             underlay.style.clear = "both";
@@ -136,25 +96,16 @@ function init() {
         }
     }
  
-    // disable fixed background
     if (!options.fixedBackground && !isExcluded) {
         body.style.backgroundAttachment = "scroll";
         html.style.backgroundAttachment = "scroll";
     }
 }
  
- 
-/************************************************
- * SCROLLING 
- ************************************************/
- 
 var que = [];
 var pending = false;
 var lastScroll = +new Date;
- 
-/**
- * Pushes scroll actions to the scrolling queue.
- */
+
 function scrollArray(elem, left, top, delay) {
     
     delay || (delay = 1000);
@@ -174,7 +125,6 @@ function scrollArray(elem, left, top, delay) {
         lastScroll = +new Date;
     }          
     
-    // push a scroll command
     que.push({
         x: left, 
         y: top, 
@@ -182,8 +132,7 @@ function scrollArray(elem, left, top, delay) {
         lastY: (top  < 0) ? 0.99 : -0.99, 
         start: +new Date
     });
-        
-    // don't act if there's a pending queue
+
     if (pending) {
         return;
     }  
@@ -202,33 +151,26 @@ function scrollArray(elem, left, top, delay) {
             var elapsed  = now - item.start;
             var finished = (elapsed >= options.animationTime);
             
-            // scroll position: [0, 1]
             var position = (finished) ? 1 : elapsed / options.animationTime;
             
-            // easing [optional]
             if (options.pulseAlgorithm) {
                 position = pulse(position);
             }
             
-            // only need the difference
             var x = (item.x * position - item.lastX) >> 0;
             var y = (item.y * position - item.lastY) >> 0;
             
-            // add this to the total scrolling
             scrollX += x;
             scrollY += y;            
             
-            // update last values
             item.lastX += x;
             item.lastY += y;
         
-            // delete and step back if it's over
             if (finished) {
                 que.splice(i, 1); i--;
             }           
         }
  
-        // scroll left and top
         if (scrollWindow) {
             window.scrollBy(scrollX, scrollY);
         } 
@@ -237,7 +179,6 @@ function scrollArray(elem, left, top, delay) {
             if (scrollY) elem.scrollTop  += scrollY;                    
         }
         
-        // clean up if there's nothing left to do
         if (!left && !top) {
             que = [];
         }
@@ -249,15 +190,9 @@ function scrollArray(elem, left, top, delay) {
         }
     };
     
-    // start a new queue of actions
     requestFrame(step, elem, 0);
     pending = true;
 }
- 
- 
-/***********************************************
- * EVENTS
- ***********************************************/
  
 /**
  * Mouse wheel handler.
@@ -271,9 +206,7 @@ function wheel(event) {
     
     var target = event.target;
     var overflowing = overflowingAncestor(target);
-    
-    // use default if there's no overflowing
-    // element or default action is prevented    
+      
     if (!overflowing || event.defaultPrevented ||
         isNodeName(activeElement, "embed") ||
        (isNodeName(target, "embed") && /\.pdf/i.test(target.src))) {
@@ -283,19 +216,14 @@ function wheel(event) {
     var deltaX = event.wheelDeltaX || 0;
     var deltaY = event.wheelDeltaY || 0;
     
-    // use wheelDelta if deltaX/Y is not available
     if (!deltaX && !deltaY) {
         deltaY = event.wheelDelta || 0;
     }
  
-    // check if it's a touchpad scroll that should be ignored
     if (!options.touchpadSupport && isTouchpad(deltaY)) {
         return true;
     }
  
-    // scale by step size
-    // delta is 120 most of the time
-    // synaptics seems to send 1 sometimes
     if (Math.abs(deltaX) > 1.2) {
         deltaX *= options.stepSize / 120;
     }
@@ -317,9 +245,6 @@ function keydown(event) {
     var modifier = event.ctrlKey || event.altKey || event.metaKey || 
                   (event.shiftKey && event.keyCode !== key.spacebar);
     
-    // do nothing if user is editing text
-    // or using a modifier key (except shift)
-    // or in a dropdown
     if ( /input|textarea|select|embed/i.test(target.nodeName) ||
          target.isContentEditable || 
          event.defaultPrevented   ||
@@ -378,19 +303,11 @@ function keydown(event) {
     event.preventDefault();
 }
  
-/**
- * Mousedown event only for updating activeElement
- */
 function mousedown(event) {
     activeElement = event.target;
 }
  
- 
-/***********************************************
- * OVERFLOW
- ***********************************************/
- 
-var cache = {}; // cleared out every once in while
+var cache = {};
 setInterval(function () { cache = {}; }, 10 * 1000);
  
 var uniqueID = (function () {
@@ -417,7 +334,7 @@ function overflowingAncestor(el) {
         elems.push(el);
         if (rootScrollHeight === el.scrollHeight) {
             if (!isFrame || root.clientHeight + 10 < rootScrollHeight) {
-                return setCache(elems, document.body); // scrolling root in WebKit
+                return setCache(elems, document.body);
             }
         } else if (el.clientHeight + 10 < el.scrollHeight) {
             overflow = getComputedStyle(el, "").getPropertyValue("overflow-y");
@@ -427,11 +344,6 @@ function overflowingAncestor(el) {
         }
     } while (el = el.parentNode);
 }
- 
- 
-/***********************************************
- * HELPERS
- ***********************************************/
  
 function addEvent(type, fn, bubble) {
     window.addEventListener(type, fn, (bubble||false));
@@ -482,27 +394,13 @@ var requestFrame = (function () {
               };
 })();
  
- 
-/***********************************************
- * PULSE
- ***********************************************/
- 
-/**
- * Viscous fluid with a pulse for part and decay for the rest.
- * - Applies a fixed force over an interval (a damped acceleration), and
- * - Lets the exponential bleed away the velocity over a longer interval
- * - Michael Herf, http://stereopsis.com/stopping/
- */
 function pulse_(x) {
     var val, start, expx;
-    // test
     x = x * options.pulseScale;
-    if (x < 1) { // acceleartion
+    if (x < 1) {
         val = x - (1 - Math.exp(-x));
-    } else {     // tail
-        // the previous animation ended here:
+    } else {
         start = Math.exp(-1);
-        // simple viscous drag
         x -= 1;
         expx = 1 - Math.exp(-x);
         val = start + (expx * (1 - start));

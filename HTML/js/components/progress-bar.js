@@ -1,9 +1,6 @@
-// Created by: Farukham: (https://github.com/farukham/Bootstrap-Animated-Progress-Bars)
-// Progress Bar
 var ProgressBar = function() {
     "use strict";
 
-    // Handle Progress Bar Horizontal
     var handleProgressBars = function() {
         $(document).ready(function() {
             $('.progress').each(function() {
@@ -25,7 +22,7 @@ var ProgressBar = function() {
 
     return {
         init: function() {
-            handleProgressBars(); // initial setup for progressbars
+            handleProgressBars();
         }
     }
 }();
