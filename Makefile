@@ -3,20 +3,20 @@
 NAME = webserv
 
 SRCS =	Cluster/Cluster.cpp\
-        Cluster/Server.cpp\
-        Cluster/Server_utils.cpp\
-        Request/Request.cpp\
-        Request/RequestUtils.cpp\
-        ConfigParser/Config.cpp\
-        ConfigParser/ConfigParser.cpp\
-        ConfigParser/Location.cpp\
-        Methods/Methods.cpp\
-        Methods/MethodUtils.cpp\
-        Response/Response.cpp\
-        AutoIndex/AutoIndex.cpp\
-        CgiHandler/CgiHandler.cpp\
-        main.cpp\
-        Utils.cpp
+	Cluster/Server.cpp\
+	Cluster/Server_utils.cpp\
+	Request/Request.cpp\
+	Request/RequestUtils.cpp\
+	ConfigParser/Config.cpp\
+	ConfigParser/ConfigParser.cpp\
+	ConfigParser/Location.cpp\
+	Methods/Methods.cpp\
+	Methods/MethodUtils.cpp\
+	Response/Response.cpp\
+	AutoIndex/AutoIndex.cpp\
+	CgiHandler/CgiHandler.cpp\
+	main.cpp\
+	Utils.cpp
 HDRS =	Webserv.hpp
 OBJS = $(SRCS:.cpp=.o)
 
@@ -31,6 +31,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS) $(HDRS)
 	$(CC) $(SRCS) -o $(NAME)
+	mkdir -p drunksite/downloads
 
 clean:
 	rm -f $(OBJS) drunksite/.ilnur.txt drunksite/downloads/*
