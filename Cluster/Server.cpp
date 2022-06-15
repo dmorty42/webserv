@@ -47,7 +47,6 @@ int Server::receive(int connection) {
     char buff[MEGA];
     size_t header, length, body;
     size_t ret = ::recv(connection, buff, MEGA, 0);
-    // std::cout << "!\n" << buff << "!\n" << std::endl;
     if (ret < 1) {
         close(connection);
         if (ret < 0)

@@ -16,11 +16,6 @@ Request::Request(std::string& buff, Config* config, int con) : _request(buff), _
                                     _body(buff.substr(buff.find("\r\n\r\n"))){
     _values = ft_values(buff);
     checkQuery();
-    // if (_methodCode)
-    // {
-    //     delete _methodCode;
-    //     _methodCode = NULL;
-    // }
     _methodCode = new Methods(*this, *config, con);
 }
 

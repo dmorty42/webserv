@@ -112,15 +112,10 @@ std::string CgiHandler::readFile(std::string file) {
 
     memset(buffer, '\0', 1024);
 	fd = open(file.c_str(), O_RDONLY);
-	// if (fd < -1)
-	// 	std::cout << "Error" << std::endl;
 	while ((res = read(fd, buffer, 1024)) > 0) {
 		result += buffer;
 		memset(buffer, '\0', 1024);
 	}
-	// if (res < 0)
-    //     std::cout << "Error" << std::endl;
 	close(fd);
-    // std::cout << result << std::endl;
 	return (result);
 }

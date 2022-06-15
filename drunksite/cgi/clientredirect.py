@@ -11,9 +11,6 @@ like = form.getvalue('like')
 dontlike  = form.getvalue('dontlike')
 
 
-#print 'LoCatIon:/foo/jbcgi.pl/path/info?query=string\r\n\r\n'
-#print 'LoCatIon:http://Bim/Bam/Boumm\r\n\r\n'
-
 if like and dontlike:
     print 'HTTP/1.1 200 OK'
     print 'Content-Type: text/html\r\n\r\n'
