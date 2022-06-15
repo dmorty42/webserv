@@ -71,7 +71,7 @@ Location::Location(std::string block, std::string directory) {
     root = parseRoot(block);
     allowedMethods = parseMethod(block);
     index = parseIndex(block);
-    bodySize = parseBodySize(block) * MEGA;
+    bodySize = parseBodySize(block) * MEGA * 10;
     auto_index = parseAutoIndex(block);
     redirect = parseRedirect(block);
     cgi = parseCgi(block);
